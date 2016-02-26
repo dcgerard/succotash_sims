@@ -121,23 +121,55 @@ img {
 
 <div id="TOC">
 <ul>
-<li><a href="#tutorials">Tutorials</a></li>
-<li><a href="#using-rmardown-to-document-anaysis-an-example">Using Rmardown to document anaysis: An example</a></li>
+<li><a href="#known-grid-confounders-and-variances.">Known: Grid, Confounders, and Variances.</a></li>
+<li><a href="#known-grid-and-confounders.">Known: Grid and Confounders.</a></li>
+<li><a href="#all-null-sims.-grid-confounders-and-variance-unknown.">All Null Sims. Grid, Confounders, and Variance <em>unknown</em>.</a></li>
+<li><a href="#nonnull-sims.-grid-confounders-and-variance-unknown.">Nonnull Sims. Grid, Confounders, and Variance <em>unknown</em>.</a></li>
+<li><a href="#other-implementation-checks.">Other Implementation Checks.</a></li>
 </ul>
 </div>
 
 <p><strong>Last updated:</strong> 2016-02-26</p>
-<p><strong>Code version:</strong> 8c202d20a43f52ba7ff8ca43da0aa2a8d965c18c</p>
-<div id="tutorials" class="section level2">
-<h2>Tutorials</h2>
+<p><strong>Code version:</strong> aad140ef700d3d54644a0abc7388f4641b900f73</p>
+<div id="known-grid-confounders-and-variances." class="section level2">
+<h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
-<li><a href="tutorial.html">Making a project site</a> (<a href="../docs/repo-setup-tutorial-stephens-lab-2015-12-03.pdf">2015-12-12 lab meeting slides</a>)</li>
+<li><a href="alpha_sig_known.pdf">Grid size of 3 with variances close together, <span class="math inline">\(\pi_0\)</span> overestimated.</a></li>
+<li><a href="alpha_sig_tau_known.pdf">Grid size of 3 with one variance very far apart, <span class="math inline">\(\pi_0\)</span> accurately estimated.</a></li>
 </ul>
 </div>
-<div id="using-rmardown-to-document-anaysis-an-example" class="section level2">
-<h2>Using Rmardown to document anaysis: An example</h2>
+<div id="known-grid-and-confounders." class="section level2">
+<h2>Known: Grid and Confounders.</h2>
 <ul>
-<li><a href="single-cell-pca.html">Use PCA to visualize some single-cell data</a></li>
+<li><a href="alpha_tau_known_1df_writeup.pdf">Variances drawn from <span class="math inline">\(\chi^2_1\)</span>.</a></li>
+<li><a href="alpha_tau_known_writeup.pdf">Variances drawn from <span class="math inline">\(\chi^2_5\)</span>.</a></li>
+</ul>
+</div>
+<div id="all-null-sims.-grid-confounders-and-variance-unknown." class="section level2">
+<h2>All Null Sims. Grid, Confounders, and Variance <em>unknown</em>.</h2>
+<ul>
+<li><a href="count_theo_sims.pdf">Idealized data from SUCCOTASH model. SUCCOTASH underestimates lfdr but does better in terms of squared error loss.</a></li>
+<li><a href="count_theo_sims_cpm.pdf">Same as above but using counts-per-million as output.</a></li>
+<li><a href="suc_v_rest_real_writeup.pdf">Lung data, covariates randomized, n = 200, SUCCOTASH does best in terms of SSE and OK in terms of lfdr.</a></li>
+<li><a href="suc_v_rest_real_writeu_20v20.pdf">Same as previous but with n = 40. Still best in terms of SSE but lfdr performance is horrible.</a></li>
+</ul>
+</div>
+<div id="nonnull-sims.-grid-confounders-and-variance-unknown." class="section level2">
+<h2>Nonnull Sims. Grid, Confounders, and Variance <em>unknown</em>.</h2>
+<ul>
+<li><a href="count_theo_nonnull_cpm.pdf">Idealized data from SUCCOTASH model. SUCCOTASH underestimates <span class="math inline">\(\pi_0\)</span> but does well in terms of squared error loss.</a></li>
+<li><a href="varyNsampNullpiLog2sd.pdf">31 competitors, varying n, <span class="math inline">\(\pi_0\)</span>, and log2fold sd. SUCCOTASH does well for AUC and worst for estimating <span class="math inline">\(\pi_0\)</span>.</a></li>
+<li><a href="varyNsampNullpiLog2sd_smallN.pdf">Same as previous but with smaller <span class="math inline">\(n \in \{3,5\}\)</span>. SUCCOTASH performs worst in terms of <span class="math inline">\(\pi_0\)</span>.</a></li>
+<li><a href="varyNsampNullpiLog2sd_cateonly.pdf">Explore different options for CATE. When <span class="math inline">\(n = 20\)</span>, CATE does very well estimating <span class="math inline">\(\pi_0\)</span>.</a></li>
+<li><a href="varyNsampNullpiLog2sd_cateonly_10000.pdf">Same as previous but with larger number of genes (<span class="math inline">\(p = 10,000\)</span>). <span class="math inline">\(n = 20\)</span> is still pretty good.</a></li>
+<li><a href="varyNsampNullpiLog2sd_cateVsMouthwash.pdf">Include SUCCOTASH (MOUTHWASH) into the CATE comparisons with <span class="math inline">\(p = 1000\)</span>. Competitive in terms of AUC but horrible in terms of <span class="math inline">\(\pi_0\)</span>.</a></li>
+<li><a href="calibrate_lambda.pdf">Same as previous but include different regularization parameters in SUCCOTASH. Even <em>very</em> large values of <span class="math inline">\(\lambda\)</span> aren’t enough.</a></li>
+</ul>
+</div>
+<div id="other-implementation-checks." class="section level2">
+<h2>Other Implementation Checks.</h2>
+<ul>
+<li><a href="check_with_ash.pdf">Gives same results as <code>ashr</code> when no confounders.</a></li>
 </ul>
 </div>
 
