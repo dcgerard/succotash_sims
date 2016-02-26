@@ -131,7 +131,7 @@ img {
 </div>
 
 <p><strong>Last updated:</strong> 2016-02-26</p>
-<p><strong>Code version:</strong> 9753258b5ae07db92e590e2b763f5495a69b9cb5</p>
+<p><strong>Code version:</strong> 9194127460896ac99540bb382809a598857b4d7e</p>
 <div id="abstract" class="section level2">
 <h2>Abstract</h2>
 <p>I look at an example where SUCCOTASH performs very poorly in estimating <span class="math inline">\(\pi_0\)</span>. Even when the regularization parameter is huge, SUCCOTASH will still underestimate <span class="math inline">\(\pi_0\)</span>. If we provide the true grid to SUCCOTASH, then it performs better.</p>
@@ -172,7 +172,7 @@ X &lt;- model.matrix(~d_out$input$condition)</code></pre>
 suc_out10 &lt;- succotash(Y = Y, X = X, k = num_sv, fa_method = &quot;pca&quot;, lambda0 = 10, num_em_runs = 3) ## no regularization
 suc_out100 &lt;- succotash(Y = Y, X = X, k = num_sv, fa_method = &quot;pca&quot;, lambda0 = 100, num_em_runs = 3) ## no regularization
 suc_out200 &lt;- succotash(Y = Y, X = X, k = num_sv, fa_method = &quot;pca&quot;, lambda0 = 200, num_em_runs = 3) ## no regularization</code></pre>
-<p>This is an example where the default regularization provides a <span class="math inline">\(\pi_0\)</span> of only 0.0016. Let’s look at the estimates of the <span class="math inline">\(\pi\)</span>’s for each value of regularization.</p>
+<p>This is an example where the default regularization provides a <span class="math inline">\(\pi_0\)</span> of only 0.5752. Let’s look at the estimates of the <span class="math inline">\(\pi\)</span>’s for each value of regularization.</p>
 <pre class="r"><code>plot(suc_out$tau_seq, suc_out$pi_vals, type = &#39;h&#39;, ylim = c(0,1), xlab = expression(tau^2),
      ylab = expression(hat(pi)[0]), main = &quot;Lambda = 1&quot;)
 abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
