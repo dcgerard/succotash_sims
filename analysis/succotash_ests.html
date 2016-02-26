@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="David Gerard" />
+
+
+<title>Look at SUCCOTASH estimates when vary regularization parameter.</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+
+<style type="text/css">
+
+/* padding for bootstrap navbar */
+body {
+  padding-top: 50px;
+  padding-bottom: 40px;
+}
+
+
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h2 {
+  padding-top: 55px;
+  margin-top: -55px;
+}
+.section h3 {
+  padding-top: 55px;
+  margin-top: -55px;
+}
+
+
+
+/* don't use link color in navbar */
+.dropdown-menu>li>a {
+  color: black;
+}
+
+/* some padding for disqus */
+#disqus_thread {
+  margin-top: 45px;
+}
+
+</style>
+
+<link rel="stylesheet" href="libs/font-awesome-4.1.0/css/font-awesome.min.css"/>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/textmate.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">succotash_sims</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="LICENSE">License</a></li>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+<h1 class="title">Look at SUCCOTASH estimates when vary regularization parameter.</h1>
+<h4 class="author"><em>David Gerard</em></h4>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#generate-data">Generate Data</a></li>
+<li><a href="#run-succotash-and-observe-hatpi_0-values.">Run <code>succotash</code> and observe <span class="math inline">\(\hat{\pi}_0\)</span> values.</a></li>
+<li><a href="#session-information">Session information</a></li>
+</ul>
+</div>
+
+<p><strong>Last updated:</strong> 2016-02-26</p>
+<p><strong>Code version:</strong> 9753258b5ae07db92e590e2b763f5495a69b9cb5</p>
+<div id="abstract" class="section level2">
+<h2>Abstract</h2>
+<p>I look at an example where SUCCOTASH performs very poorly in estimating <span class="math inline">\(\pi_0\)</span>. Even when the regularization parameter is huge, SUCCOTASH will still underestimate <span class="math inline">\(\pi_0\)</span>. If we provide the true grid to SUCCOTASH, then it performs better.</p>
+</div>
+<div id="generate-data" class="section level2">
+<h2>Generate Data</h2>
+<p>Load in <code>succotashr</code> and source datamaker_gerard.R.</p>
+<p>Set parameters for data generation and obtain data. We’ll look at the situation where</p>
+<ul>
+<li><span class="math inline">\(p = 1000\)</span>,</li>
+<li><span class="math inline">\(n = 20\)</span> (10 vs 10)</li>
+<li><span class="math inline">\(\pi_0 = 0.9\)</span></li>
+<li>Data drawn from the Lung GTEX data and signal added via Poisson thinning.</li>
+</ul>
+<pre class="r"><code>set.seed(34789)
+args_val &lt;- list()
+args_val$tissue &lt;- &quot;Lung&quot;
+args_val$path &lt;- &quot;../data/&quot;
+args_val$Ngene &lt;- 1000
+## Nonnull case
+args_val$poisthin &lt;- TRUE
+args_val$log2foldmean &lt;- 0
+args_val$skip_gene &lt;- 5
+args_val$Nsamp &lt;- 10
+args_val$log2foldsd &lt;- 1
+args_val$nullpi &lt;- 0.9 ## true pi_0
+
+d_out &lt;- datamaker(args_val)</code></pre>
+<p>Extract the data we need to run <code>succotash</code>.</p>
+<pre class="r"><code>num_sv &lt;- d_out$meta$dfargs$num.sv
+Ycounts &lt;- d_out$input$counts
+Y &lt;- t(log(as.matrix(Ycounts) + 1)) ## log(counts + 1)
+X &lt;- model.matrix(~d_out$input$condition)</code></pre>
+</div>
+<div id="run-succotash-and-observe-hatpi_0-values." class="section level2">
+<h2>Run <code>succotash</code> and observe <span class="math inline">\(\hat{\pi}_0\)</span> values.</h2>
+<pre class="r"><code>suc_out &lt;- succotash(Y = Y, X = X, k = num_sv, fa_method = &quot;pca&quot;, lambda0 = 1, num_em_runs = 3) ## no regularization
+suc_out10 &lt;- succotash(Y = Y, X = X, k = num_sv, fa_method = &quot;pca&quot;, lambda0 = 10, num_em_runs = 3) ## no regularization
+suc_out100 &lt;- succotash(Y = Y, X = X, k = num_sv, fa_method = &quot;pca&quot;, lambda0 = 100, num_em_runs = 3) ## no regularization
+suc_out200 &lt;- succotash(Y = Y, X = X, k = num_sv, fa_method = &quot;pca&quot;, lambda0 = 200, num_em_runs = 3) ## no regularization</code></pre>
+<p>This is an example where the default regularization provides a <span class="math inline">\(\pi_0\)</span> of only 0.0016. Let’s look at the estimates of the <span class="math inline">\(\pi\)</span>’s for each value of regularization.</p>
+<pre class="r"><code>plot(suc_out$tau_seq, suc_out$pi_vals, type = &#39;h&#39;, ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = &quot;Lambda = 1&quot;)
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend(&quot;right&quot;, &quot;True pi_0&quot;, col = 2, lwd = 2, lty = 2)</code></pre>
+<p><img src="figure/succotash_ests.Rmd/unnamed-chunk-5-1.png" title="" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(suc_out10$tau_seq, suc_out10$pi_vals, type = &#39;h&#39;, ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = &quot;Lambda = 10&quot;)
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend(&quot;right&quot;, &quot;True pi_0&quot;, col = 2, lwd = 2, lty = 2)</code></pre>
+<p><img src="figure/succotash_ests.Rmd/unnamed-chunk-5-2.png" title="" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(suc_out100$tau_seq, suc_out100$pi_vals, type = &#39;h&#39;, ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = &quot;Lambda = 100&quot;)
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend(&quot;right&quot;, &quot;True pi_0&quot;, col = 2, lwd = 2, lty = 2)</code></pre>
+<p><img src="figure/succotash_ests.Rmd/unnamed-chunk-5-3.png" title="" alt="" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(suc_out200$tau_seq, suc_out200$pi_vals, type = &#39;h&#39;, ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = &quot;Lambda = 200&quot;)
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend(&quot;right&quot;, &quot;True pi_0&quot;, col = 2, lwd = 2, lty = 2)</code></pre>
+<p><img src="figure/succotash_ests.Rmd/unnamed-chunk-5-4.png" title="" alt="" width="672" style="display: block; margin: auto;" /></p>
+<p>A huge amount of mass is very close to 0, but not quite 0. When there is no regularization (<span class="math inline">\(\lambda = 1\)</span>), the amount of mass on variances less than 0.5 is 0.9387. I don’t think I need to run more than 3 EM runs. By default, the first EM run puts <span class="math inline">\(1/p\)</span> mass on all <span class="math inline">\(\tau_k\)</span> such that <span class="math inline">\(\pi_k \neq 0\)</span> and puts the remaining mass on <span class="math inline">\(\pi_0\)</span>. This would be an initial condition of placing 0.967 mass on <span class="math inline">\(\pi_0\)</span>, which is very large and close to the truth. If we give it the true grid but randomize the inital values of <span class="math inline">\(\pi_0\)</span> and <span class="math inline">\(\pi_1\)</span> then we get pretty good results:</p>
+<pre class="r"><code>for(index in 1:5) {
+  pi_init &lt;- runif(1)
+  suc_out_zero &lt;- succotashr::succotash_given_alpha(Y = suc_out$Y1_scaled, alpha = suc_out$alpha_scaled, 
+                                      sig_diag = suc_out$sig_diag_scaled, num_em_runs = 10, 
+                                      tau_seq = c(0, 1), em_pi_init = c(pi_init, 1 - pi_init))
+  cat(&quot;Repetition =&quot;, index,&quot;\n&quot;)
+  cat(&quot;   Pi0_hat =&quot;, suc_out_zero$pi_vals,&quot;\n\n&quot;)
+}</code></pre>
+<pre><code>Repetition = 1 
+   Pi0_hat = 0.839 0.161 
+
+Repetition = 2 
+   Pi0_hat = 0.839 0.161 
+
+Repetition = 3 
+   Pi0_hat = 0.839 0.161 
+
+Repetition = 4 
+   Pi0_hat = 0.839 0.161 
+
+Repetition = 5 
+   Pi0_hat = 0.839 0.161 </code></pre>
+</div>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.2.3 (2015-12-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 14.04.4 LTS
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] knitr_1.12.3
+
+loaded via a namespace (and not attached):
+ [1] magrittr_1.5     formatR_1.2.1    tools_3.2.3      htmltools_0.3   
+ [5] yaml_2.1.13      succotashr_0.1.0 SQUAREM_2014.8-1 stringi_1.0-1   
+ [9] rmarkdown_0.9.2  stringr_1.0.0    digest_0.6.9     evaluate_0.8    </code></pre>
+</div>
+
+
+<!-- some extra javascript for older browsers -->
+<script type="text/javascript" src="libs/polyfill.js"></script>
+
+<script>
+
+// manage active state of menu based on current page
+$(document).ready(function () {
+
+    // active menu
+    href = window.location.pathname
+    href = href.substr(href.lastIndexOf('/') + 1)
+    $('a[href="' + href + '"]').parent().addClass('active');
+
+    // manage active menu header
+    if (href.startsWith('authoring_'))
+      $('a[href="' + 'authoring' + '"]').parent().addClass('active');
+    else if (href.endsWith('_format.html'))
+      $('a[href="' + 'formats' + '"]').parent().addClass('active');
+    else if (href.startsWith('developer_'))
+      $('a[href="' + 'developer' + '"]').parent().addClass('active');
+
+});
+
+</script>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

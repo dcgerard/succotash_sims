@@ -37,3 +37,4 @@ title: "Home"
 ## Other Implementation Checks.
 
 * [Gives same results as `ashr` when no confounders.](check_with_ash.pdf)
+* [An example where SUCCOTASH performs poorly](succotash_ests.html)

@@ -1,0 +1,108 @@
+---
+title: "Look at SUCCOTASH estimates when vary regularization parameter."
+author: "David Gerard"
+---
+
+**Last updated:** `r Sys.Date()`
+
+**Code version:** `r system("git log -1 --format='%H'", intern = TRUE)`
+
+```{r chunk-options, include=FALSE}
+source("chunk-options.R")
+```
+
+## Abstract
+I look at an example where SUCCOTASH performs very poorly in estimating $\pi_0$. Even when the regularization parameter is huge, SUCCOTASH will still underestimate $\pi_0$. If we provide the true grid to SUCCOTASH, then it performs better.
+
+## Generate Data
+
+Load in `succotashr` and source datamaker_gerard.R.
+```{r, echo = FALSE, results = "hide", message = FALSE, cache = TRUE}
+library(succotashr)
+source("../code/datamaker_gerard.R")
+```
+
+Set parameters for data generation and obtain data. We'll look at the situation where
+
+* $p = 1000$,
+* $n = 20$ (10 vs 10)
+* $\pi_0 = 0.9$
+* Data drawn from the Lung GTEX data and signal added via Poisson thinning.
+```{r, cache = TRUE, warning = FALSE, results = "hide", message=FALSE}
+set.seed(34789)
+args_val <- list()
+args_val$tissue <- "Lung"
+args_val$path <- "../data/"
+args_val$Ngene <- 1000
+## Nonnull case
+args_val$poisthin <- TRUE
+args_val$log2foldmean <- 0
+args_val$skip_gene <- 5
+args_val$Nsamp <- 10
+args_val$log2foldsd <- 1
+args_val$nullpi <- 0.9 ## true pi_0
+
+d_out <- datamaker(args_val)
+```
+
+Extract the data we need to run `succotash`.
+```{r}
+num_sv <- d_out$meta$dfargs$num.sv
+Ycounts <- d_out$input$counts
+Y <- t(log(as.matrix(Ycounts) + 1)) ## log(counts + 1)
+X <- model.matrix(~d_out$input$condition)
+```
+
+## Run `succotash` and observe $\hat{\pi}_0$ values.
+
+```{r, results = 'hide', cache = TRUE}
+suc_out <- succotash(Y = Y, X = X, k = num_sv, fa_method = "pca", lambda0 = 1, num_em_runs = 3) ## no regularization
+suc_out10 <- succotash(Y = Y, X = X, k = num_sv, fa_method = "pca", lambda0 = 10, num_em_runs = 3) ## no regularization
+suc_out100 <- succotash(Y = Y, X = X, k = num_sv, fa_method = "pca", lambda0 = 100, num_em_runs = 3) ## no regularization
+suc_out200 <- succotash(Y = Y, X = X, k = num_sv, fa_method = "pca", lambda0 = 200, num_em_runs = 3) ## no regularization
+```
+
+This is an example where the default regularization provides a $\pi_0$ of only `r suc_out$pi_vals[1]`. Let's look at the estimates of the $\pi$'s for each value of regularization.
+```{r}
+plot(suc_out$tau_seq, suc_out$pi_vals, type = 'h', ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = "Lambda = 1")
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend("right", "True pi_0", col = 2, lwd = 2, lty = 2)
+
+plot(suc_out10$tau_seq, suc_out10$pi_vals, type = 'h', ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = "Lambda = 10")
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend("right", "True pi_0", col = 2, lwd = 2, lty = 2)
+
+plot(suc_out100$tau_seq, suc_out100$pi_vals, type = 'h', ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = "Lambda = 100")
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend("right", "True pi_0", col = 2, lwd = 2, lty = 2)
+
+plot(suc_out200$tau_seq, suc_out200$pi_vals, type = 'h', ylim = c(0,1), xlab = expression(tau^2),
+     ylab = expression(hat(pi)[0]), main = "Lambda = 200")
+abline(h = args_val$nullpi, col = 2, lwd = 2, lty = 2)
+legend("right", "True pi_0", col = 2, lwd = 2, lty = 2)
+```
+
+
+A huge amount of mass is very close to 0, but not quite 0. When there is no regularization ($\lambda = 1$), the amount
+of mass on variances less than 0.5 is `r sum(suc_out$pi_vals[suc_out$tau_seq < 0.5])`. I don't think I need to run more than 3 EM runs. By default, the first EM run puts $1/p$ mass on all $\tau_k$ such that $\pi_k \neq 0$ and puts the remaining mass on $\pi_0$. This would be an initial condition of placing `r 1 - length(suc_out$pi_vals) / args_val$Ngene` mass on $\pi_0$, which is very large and close to the truth. If we give it the true grid but randomize the inital values of $\pi_0$ and $\pi_1$ then we get pretty good results:
+
+```{r}
+for(index in 1:5) {
+  pi_init <- runif(1)
+  suc_out_zero <- succotashr::succotash_given_alpha(Y = suc_out$Y1_scaled, alpha = suc_out$alpha_scaled, 
+                                      sig_diag = suc_out$sig_diag_scaled, num_em_runs = 10, 
+                                      tau_seq = c(0, 1), em_pi_init = c(pi_init, 1 - pi_init))
+  cat("Repetition =", index,"\n")
+  cat("   Pi0_hat =", suc_out_zero$pi_vals,"\n\n")
+}
+```
+
+
+## Session information
+
+```{r info}
+sessionInfo()
+```
