@@ -1,0 +1,183 @@
+---
+title: "Look at SUCCOTASH estimates given true grid."
+author: "David Gerard"
+---
+
+**Last updated:** `r Sys.Date()`
+
+**Code version:** `r system("git log -1 --format='%H'", intern = TRUE)`
+
+```{r chunk-options, include=FALSE}
+source("chunk-options.R")
+```
+
+## Abstract
+I provide the true grid to SUCCOTASH and see how well it performs. It accurately estimates $\pi_0$ and has the highest AUC among estimators that do not use negative controls.
+
+## Generate Data
+
+Load in `succotashr` and source datamaker_gerard.R.
+```{r, results = "hide", message = FALSE}
+library(succotashr)
+source("../code/datamaker_onlydata.R")
+library(ggplot2)
+library(reshape2)
+```
+
+Set parameters for data generation. We'll look at the situation where
+
+* $p = 1000$,
+* $n \in \{10, 20, 40\}$ (10 vs 10),
+* $\pi_0 \in \{0.5,0.9\}$,
+* $\sigma^2_{log} \in \{1, 5\}$,
+* Data drawn from the Lung GTEX data and signal added via Poisson thinning.
+```{r, warning = FALSE, results = "hide", message=FALSE}
+set.seed(105340)
+args_val <- list()
+args_val$tissue <- "Lung"
+args_val$path <- "../data/"
+args_val$Ngene <- 1000
+## Nonnull case
+args_val$poisthin <- TRUE
+args_val$log2foldmean <- 0
+args_val$skip_gene <- 5
+## the following vary
+Nsamp_seq <- c(5, 10, 20)
+log2foldsd_seq <- c(1, 5)
+nullpi_seq <- c(0.5, 0.9)
+```
+
+Extract the data we need to run `succotash`.
+```{r}
+itermax <- 100
+pi0_mat <- matrix(NA, nrow = itermax, ncol = length(Nsamp_seq) * length(nullpi_seq) *
+                                          length(log2foldsd_seq))
+auc_mat <- matrix(NA, nrow = itermax, ncol = length(Nsamp_seq) * length(nullpi_seq) *
+                                          length(log2foldsd_seq))
+
+colnames(pi0_mat) <-
+    apply(expand.grid(log2foldsd_seq, nullpi_seq*10, Nsamp_seq),
+                           1, paste, collapse = "_")
+colnames(auc_mat) <- apply(expand.grid(log2foldsd_seq, nullpi_seq*10, Nsamp_seq),
+                           1, paste, collapse = "_")
+```
+
+## Simulations
+For each unique combination of $n$, $\pi_0$ and $\sigma^2_{log}$, we run 100 repetitions of generating data from the Lung GTEX data then using the true grid of $\tau = (0, \sigma_{log})$ for SUCCOTASH. For SUCCOTASH, I did not regularize $\pi_0$ and I used PCA to estimate the hidden confounders.
+```{r, cache = TRUE, results="hide"}
+#col_index <- 0
+#for(Nsamp_index in 1:length(Nsamp_seq)) {
+#    args_val$Nsamp <- Nsamp_seq[Nsamp_index]
+#    for(nullpi_index in 1:length(nullpi_seq)) {
+#        args_val$nullpi <- nullpi_seq[nullpi_index]
+#        for(log2foldsd_index in 1:length(log2foldsd_seq)) {
+#            args_val$log2foldsd <- log2foldsd_seq[log2foldsd_index]
+#            col_index <- col_index + 1
+#            for(iter_index in 1:itermax) {
+#                d_out <- datamaker_counts_only(args_val)
+#                Ycounts <- d_out$input$counts
+#                Y <- t(log(as.matrix(Ycounts) + 1)) ## log(counts + 1)
+#                X <- model.matrix(~d_out$input$condition)
+#                num_sv <- sva::num.sv(dat = t(Y), mod = X)
+#                which_null <- d_out$meta$null
+#
+#                pi_init <- runif(1)
+#                suc_out <- succotashr::succotash(Y = Y, X = X, k = num_sv, fa_method = "pca", lambda0 = 1,
+#                                   tau_seq = c(0, args_val$log2foldsd), em_pi_init = c(pi_init, 1 - pi_init))
+#
+#                auc_out <- pROC::roc(response = which_null, predictor = suc_out$lfdr)$auc
+#                pi0_out <- suc_out$pi_vals[1]
+#                
+#                auc_mat[iter_index, col_index] <- auc_out
+#                pi0_mat[iter_index, col_index] <- pi0_out
+#            }
+#        }
+#    }
+#}
+## write.csv(pi0_mat, "../output/pi0_true_grid.csv", row.names = FALSE)
+## write.csv(auc_mat, "../output/auc_true_grid.csv", row.names = FALSE)
+```
+
+
+Look at the estimates of $\pi_0$. When given the true grid, SUCCOTASH seems to perform the best in terms of estimating $\pi_0$.
+```{r}
+pi0_mat <- read.csv("../output/pi0_true_grid.csv")
+
+## read in CATE results to compare
+data_path <- "~/Data/big_sims_cate_out/"
+col_index <- 0
+for(Nsamp_index in 1:length(Nsamp_seq)) {
+    Nsamp <- Nsamp_seq[Nsamp_index]
+    for(nullpi_index in 1:length(nullpi_seq)) {
+        nullpi <- nullpi_seq[nullpi_index]
+        for(log2foldsd_index in 1:length(log2foldsd_seq)) {
+          col_index <- col_index + 1
+          log2foldsd <- log2foldsd_seq[log2foldsd_index]
+          pi0_name <- paste0(data_path, "pi0_nsamp", Nsamp,"_nullpi",
+                             nullpi * 100,
+                             "_log2foldsd", log2foldsd, ".csv")
+          pi0_mat_cate <- read.csv(file = pi0_name)[, -c(1:3, 7:9)]
+          
+          pi0_final <- cbind(pi0_mat_cate, pi0_mat[, col_index])
+          colnames(pi0_final)[length(pi0_final)] <- "SUCCOTASH"
+
+          pi0_dat <- melt(pi0_final, id.vars = NULL)
+          p <- qplot(y = value, x = variable, data = pi0_dat, geom = "boxplot", fill = I("skyblue"), 
+                     xlab = "Method", ylab = expression(hat(pi)[0]),
+                     main = paste0("Est of pi0 when n = ", Nsamp * 2,", pi0 = ", nullpi,
+                                ", log2foldsd = ", log2foldsd))
+          pi0_plot <- p + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.3)) +
+            geom_hline(yintercept = nullpi, color = "red", lty = 2, lwd = 1)
+
+          print(pi0_plot)
+        }
+    }
+}
+```
+
+Look at the AUC's. SUCCOTASH performs as well as the CATE + ASH methods, and is the best method that does not use negative controls.
+```{r}
+auc_mat <- read.csv("../output/auc_true_grid.csv")
+
+## read in CATE results to compare
+data_path <- "~/Data/big_sims_cate_out/"
+col_index <- 0
+for(Nsamp_index in 1:length(Nsamp_seq)) {
+    Nsamp <- Nsamp_seq[Nsamp_index]
+    for(nullpi_index in 1:length(nullpi_seq)) {
+        nullpi <- nullpi_seq[nullpi_index]
+        for(log2foldsd_index in 1:length(log2foldsd_seq)) {
+          col_index <- col_index + 1
+          log2foldsd <- log2foldsd_seq[log2foldsd_index]
+          
+          auc_name <- paste0(data_path, "auc_nsamp", Nsamp,"_nullpi",
+                             nullpi * 100,
+                             "_log2foldsd", log2foldsd, ".csv")
+          auc_mat_cate <- read.csv(file = auc_name)[, -c(1:3, 7:9)]
+          
+          auc_final <- cbind(auc_mat_cate, auc_mat[, col_index])
+          colnames(auc_final)[length(auc_final)] <- "SUCCOTASH"
+
+          auc_dat <- melt(auc_final, id.vars = NULL)
+          auc_plot <- qplot(x = variable, y = value, data = auc_dat, geom = "boxplot",
+                            fill = I("skyblue"), xlab = "Method", ylab = "AUC",
+                            main = paste0("AUC when n = ", Nsamp * 2,", pi0 = ", nullpi,
+                                          ", log2foldsd = ", log2foldsd)) +
+            geom_hline(yintercept = max(apply(auc_final, 2, median, na.rm = TRUE)),
+                       color = "red", lty = 2, lwd = 1) + 
+            theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.3))
+
+          print(auc_plot)
+        }
+    }
+}
+
+```
+
+Note, though, that I did not give the other ASH methods the true grid. so those methods would probably perform even better if I did so. But this simulation study was meant to show that SUCCOTASH seems to be implemented correctly.
+
+## Session information
+
+```{r info}
+sessionInfo()
+```
