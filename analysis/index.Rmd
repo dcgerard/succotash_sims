@@ -33,6 +33,7 @@ title: "Home"
 * [Same as previous but with larger number of genes ($p = 10,000$). $n = 20$ is still pretty good.](varyNsampNullpiLog2sd_cateonly_10000.pdf)
 * [Include SUCCOTASH (MOUTHWASH) into the CATE comparisons with $p = 1000$. Competitive in terms of AUC but horrible in terms of $\pi_0$.](varyNsampNullpiLog2sd_cateVsMouthwash.pdf)
 * [Same as previous but include different regularization parameters in SUCCOTASH. Even *very* large values of $\lambda$ aren't enough.](calibrate_lambda.pdf)
+* [FLASH + SUCCOTASH. Good at estimating $\pi_0$. Worse AUC than when using PCA.](varyNsampNullpiLog2sd_cateVsFlashMouthwash.pdf)
 
 ## Other Implementation Checks.
 
