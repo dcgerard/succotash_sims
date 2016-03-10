@@ -35,6 +35,7 @@ title: "Home"
 * [Same as previous but include different regularization parameters in SUCCOTASH. Even *very* large values of $\lambda$ aren't enough.](calibrate_lambda.pdf)
 * [FLASH + SUCCOTASH. Good at estimating $\pi_0$. Worse AUC than when using PCA.](varyNsampNullpiLog2sd_cateVsFlashMouthwash.pdf)
 * [Homoscedastic variance factor analyses are better calibrated than heteroscedastic models](varyNsampNullpiLog2sd_cateVsMouthwashManyFA.pdf)
+* [Empirically Bayesian shrinkage of the column-wise mean squared errors works better than using the raw column-wise mean squared errors, but worse than assuming homoscedasticity.](varyNsampNullpiLog2sd_cateVsMouthwashManyFA_shrinkPCA.pdf)
 
 ## Other Implementation Checks.
 
