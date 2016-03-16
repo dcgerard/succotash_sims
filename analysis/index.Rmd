@@ -37,6 +37,7 @@ title: "Home"
 * [Homoscedastic variance factor analyses are better calibrated than heteroscedastic models](varyNsampNullpiLog2sd_cateVsMouthwashManyFA.pdf)
 * [Empirically Bayesian shrinkage of the column-wise mean squared errors works better than using the raw column-wise mean squared errors, but worse than assuming homoscedasticity.](varyNsampNullpiLog2sd_cateVsMouthwashManyFA_shrinkPCA.pdf)
 * [Initial sims using uniform mixtures. Variance model more important than mixing distribution. Homoscedasticity still works best.](unif_mix_compare.pdf)
+* [SUCCOTASH vs ASH with homoscedastic and heteroscedastic assumptions and n = 10,000. Homoscedastic models are better calibrated but have worse AUC. SUCCOTASH generally has higher AUC](big_sims_mouth_largen_writeup.html)
 
 ## Other Implementation Checks.
 
