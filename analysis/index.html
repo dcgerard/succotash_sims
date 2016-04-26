@@ -10,14 +10,15 @@
 
 
 
+
 <title>Home</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 
 <style type="text/css">
 
@@ -74,6 +75,31 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+</style>
+
+
 </head>
 
 <body>
@@ -88,12 +114,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="libs/navigation-1.0/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -115,8 +163,12 @@ img {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="header">
-<h1 class="title">Home</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Home</h1>
+
 </div>
 
 <div id="TOC">
@@ -130,8 +182,8 @@ img {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-04-15</p>
-<p><strong>Code version:</strong> a406210415a2c38162e346237be5cc66f7bbf9de</p>
+<p><strong>Last updated:</strong> 2016-04-26</p>
+<p><strong>Code version:</strong> 779bda28b491a075cb71cbc056d967d7cf5654fb</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -161,7 +213,7 @@ img {
 <li><a href="count_theo_nonnull_cpm.pdf">Idealized data from SUCCOTASH model. SUCCOTASH underestimates <span class="math inline">\(\pi_0\)</span> but does well in terms of squared error loss.</a></li>
 <li><a href="varyNsampNullpiLog2sd.pdf">31 competitors, varying n, <span class="math inline">\(\pi_0\)</span>, and log2fold sd. SUCCOTASH does well for AUC and worst for estimating <span class="math inline">\(\pi_0\)</span>.</a></li>
 <li><a href="varyNsampNullpiLog2sd_smallN.pdf">Same as previous but with smaller <span class="math inline">\(n \in \{3,5\}\)</span>. SUCCOTASH performs worst in terms of <span class="math inline">\(\pi_0\)</span>.</a></li>
-<li><a href="varyNsampNullpiLog2sd_cateonly.pdf">Explore different options for CATE. When <span class="math inline">\(n = 20\)</span>, CATE does very well estimating <span class="math inline">\(\pi_0\)</span>.</a></li>
+<li><a href="varyNsampNullpiLog2sd_cateonly.pdf">(*)Explore different options for CATE. When <span class="math inline">\(n = 20\)</span>, CATE does very well estimating <span class="math inline">\(\pi_0\)</span>.</a></li>
 <li><a href="varyNsampNullpiLog2sd_cateonly_10000.pdf">Same as previous but with larger number of genes (<span class="math inline">\(p = 10,000\)</span>). <span class="math inline">\(n = 20\)</span> is still pretty good.</a></li>
 <li><a href="varyNsampNullpiLog2sd_cateVsMouthwash.pdf">Include SUCCOTASH (MOUTHWASH) into the CATE comparisons with <span class="math inline">\(p = 1000\)</span>. Competitive in terms of AUC but horrible in terms of <span class="math inline">\(\pi_0\)</span>.</a></li>
 <li><a href="calibrate_lambda.pdf">Same as previous but include different regularization parameters in SUCCOTASH. Even <em>very</em> large values of <span class="math inline">\(\lambda\)</span> aren’t enough.</a></li>
@@ -171,6 +223,7 @@ img {
 <li><a href="unif_mix_compare.pdf">Initial sims using uniform mixtures. Variance model more important than mixing distribution. Homoscedasticity still works best.</a></li>
 <li><a href="big_sims_mouth_largen_writeup.html">SUCCOTASH vs ASH with homoscedastic and heteroscedastic assumptions and n = 10,000. Homoscedastic models are better calibrated but have worse AUC. SUCCOTASH generally has higher AUC</a></li>
 <li><a href="big_sims_mouth_ashVsucc_writeup.html">Same as above but also including methods using limma-shrunk column-wise mean square as variance estimates.</a></li>
+<li><a href="cate_redo.pdf">Correction of (*) where I do not inflate the variance. CATE performs much poorer in terms of estimating <span class="math inline">\(\pi_0\)</span></a></li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">
@@ -214,6 +267,8 @@ $(document).ready(function () {
 });
 
 </script>
+
+
 
 </div>
 

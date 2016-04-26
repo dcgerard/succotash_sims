@@ -29,7 +29,7 @@ title: "Home"
 * [Idealized data from SUCCOTASH model. SUCCOTASH underestimates $\pi_0$ but does well in terms of squared error loss.](count_theo_nonnull_cpm.pdf)
 * [31 competitors, varying n, $\pi_0$, and log2fold sd. SUCCOTASH does well for AUC and worst for estimating $\pi_0$.](varyNsampNullpiLog2sd.pdf)
 * [Same as previous but with smaller $n \in \{3,5\}$. SUCCOTASH performs worst in terms of $\pi_0$.](varyNsampNullpiLog2sd_smallN.pdf)
-* [Explore different options for CATE. When $n = 20$, CATE does very well estimating $\pi_0$.](varyNsampNullpiLog2sd_cateonly.pdf)
+* [(*)Explore different options for CATE. When $n = 20$, CATE does very well estimating $\pi_0$.](varyNsampNullpiLog2sd_cateonly.pdf)
 * [Same as previous but with larger number of genes ($p = 10,000$). $n = 20$ is still pretty good.](varyNsampNullpiLog2sd_cateonly_10000.pdf)
 * [Include SUCCOTASH (MOUTHWASH) into the CATE comparisons with $p = 1000$. Competitive in terms of AUC but horrible in terms of $\pi_0$.](varyNsampNullpiLog2sd_cateVsMouthwash.pdf)
 * [Same as previous but include different regularization parameters in SUCCOTASH. Even *very* large values of $\lambda$ aren't enough.](calibrate_lambda.pdf)
@@ -39,6 +39,7 @@ title: "Home"
 * [Initial sims using uniform mixtures. Variance model more important than mixing distribution. Homoscedasticity still works best.](unif_mix_compare.pdf)
 * [SUCCOTASH vs ASH with homoscedastic and heteroscedastic assumptions and n = 10,000. Homoscedastic models are better calibrated but have worse AUC. SUCCOTASH generally has higher AUC](big_sims_mouth_largen_writeup.html)
 * [Same as above but also including methods using limma-shrunk column-wise mean square as variance estimates.](big_sims_mouth_ashVsucc_writeup.html)
+* [Correction of (*) where I do not inflate the variance. CATE performs much poorer in terms of estimating $\pi_0$](cate_redo.pdf)
 
 ## Other Implementation Checks.
 
