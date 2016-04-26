@@ -40,6 +40,7 @@ title: "Home"
 * [SUCCOTASH vs ASH with homoscedastic and heteroscedastic assumptions and n = 10,000. Homoscedastic models are better calibrated but have worse AUC. SUCCOTASH generally has higher AUC](big_sims_mouth_largen_writeup.html)
 * [Same as above but also including methods using limma-shrunk column-wise mean square as variance estimates.](big_sims_mouth_ashVsucc_writeup.html)
 * [Correction of (*) where I do not inflate the variance. CATE performs much poorer in terms of estimating $\pi_0$](cate_redo.pdf)
+* [Inflating variance results in improved estimates of $\pi_0$ and improved MSE](inflate_var_sims.pdf)
 
 ## Other Implementation Checks.
 
