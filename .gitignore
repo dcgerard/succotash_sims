@@ -2,9 +2,7 @@
 .Rproj.user
 .R*
 .Rhistory
-*html
 *png
-*pdf
 data
 analysis/rda
 

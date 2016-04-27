@@ -48,6 +48,7 @@ title: "Home"
 * [An example where SUCCOTASH performs poorly](succotash_ests.html)
 * [Grid is known, SUCCOTASH performs well](known_grid.html)
 * [t-likelihood seems to be implemented correctly](test_tlike.pdf)
+* [Scaling variances seems to be coded up correctly](scale_check.pdf)
 
 ## Shiny App
 
