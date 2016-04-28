@@ -41,6 +41,7 @@ title: "Home"
 * [Same as above but also including methods using limma-shrunk column-wise mean square as variance estimates.](big_sims_mouth_ashVsucc_writeup.html)
 * [Correction of (*) where I do not inflate the variance. CATE performs much poorer in terms of estimating $\pi_0$](cate_redo.pdf)
 * [Inflating variance results in improved estimates of $\pi_0$ and improved MSE](inflate_var_sims.pdf)
+* [Estimating the scale of the variance works pretty well. Best at $\pi_0 = 0.5$ and competitively at $\pi_0 = 0.9$ and $1$](scale_var_sims.pdf)
 
 ## Other Implementation Checks.
 

@@ -97,6 +97,9 @@ h5 {
 h6 {
   font-size: 12px;
 }
+.table th:not([align]) {
+  text-align: left;
+}
 </style>
 
 
@@ -182,8 +185,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-04-27</p>
-<p><strong>Code version:</strong> edb15863e9d90351ee849f1ba104966932d802ec</p>
+<p><strong>Last updated:</strong> 2016-04-28</p>
+<p><strong>Code version:</strong> 78722d8a17eba6071e16fd68cf58b93dc8ff98bf</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -225,6 +228,7 @@ $(document).ready(function () {
 <li><a href="big_sims_mouth_ashVsucc_writeup.html">Same as above but also including methods using limma-shrunk column-wise mean square as variance estimates.</a></li>
 <li><a href="cate_redo.pdf">Correction of (*) where I do not inflate the variance. CATE performs much poorer in terms of estimating <span class="math inline">\(\pi_0\)</span></a></li>
 <li><a href="inflate_var_sims.pdf">Inflating variance results in improved estimates of <span class="math inline">\(\pi_0\)</span> and improved MSE</a></li>
+<li><a href="scale_var_sims.pdf">Estimating the scale of the variance works pretty well. Best at <span class="math inline">\(\pi_0 = 0.5\)</span> and competitively at <span class="math inline">\(\pi_0 = 0.9\)</span> and <span class="math inline">\(1\)</span></a></li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">
