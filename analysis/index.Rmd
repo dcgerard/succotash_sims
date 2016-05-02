@@ -44,6 +44,7 @@ title: "Home"
 * [Estimating the scale of the variance works pretty well. Best at $\pi_0 = 0.5$ and competitively at $\pi_0 = 0.9$ and $1$](scale_var_sims.pdf)
 * [No big improvements when use different factor analysis in scaled-variance SUCCOTASH](scale_var_sims_fa.pdf)
 * [SVA + OLS + ASH while estimating variance inflation parameter does not work well in terms of estimating the null proportion.](sva_ash_varinflate.pdf) Also looked at using a penalty on the variance inflation parameter in SUCCOTASH, but only provided small improvement.s
+* [Same as above but using CATE instead of SVA. Performance of ASH + CATE is same as ASH + SVA](ashr_cate.pdf)
 
 ## Other Implementation Checks.
 
