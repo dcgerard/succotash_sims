@@ -46,6 +46,8 @@ title: "Home"
 * [SVA + OLS + ASH while estimating variance inflation parameter does not work well in terms of estimating the null proportion.](sva_ash_varinflate.pdf) Also looked at using a penalty on the variance inflation parameter in SUCCOTASH, but only provided small improvement.s
 * [Same as above but using CATE instead of SVA. Performance of ASH + CATE is same as ASH + SVA](ashr_cate.pdf)
 * [Best results I've seen. Used a two step procedure of estimating, then inflating, variance scaling parameter for SUCCOTASH.](nopen_then_inflate.pdf)
+* [Using same alternatives as in ASH paper, SUCCOTASH has superior performance](diff_alttypes_muscle.pdf)
+
 
 ## Other Implementation Checks.
 
