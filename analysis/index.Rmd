@@ -48,6 +48,7 @@ title: "Home"
 * [Best results I've seen. Used a two step procedure of estimating, then inflating, variance scaling parameter for SUCCOTASH.](nopen_then_inflate.pdf)
 * [Using same alternatives as in ASH paper, SUCCOTASH has superior performance](diff_alttypes_muscle.pdf)
 * [Same as above but including OLS + ASH. ASH does not perform well.](diff_alttypes_muscle_plus_ASH.pdf)
+* [Same as above but use RUV + estimate scale using controls + ASH instead of ASH.](diff_alttypes_muscle_plus_ASH_RUV.pdf) RUV + ASH is pretty good at estimating $\pi_0$, but has poor AUC.
 
 ## Other Implementation Checks.
 
