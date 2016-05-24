@@ -1,5 +1,6 @@
 ---
 title: "Home"
+bibliography: sva_bib.bib
 ---
 
 **Last updated:** `r Sys.Date()`
@@ -48,7 +49,8 @@ title: "Home"
 * [Best results I've seen. Used a two step procedure of estimating, then inflating, variance scaling parameter for SUCCOTASH.](nopen_then_inflate.pdf)
 * [Using same alternatives as in ASH paper, SUCCOTASH has superior performance](diff_alttypes_muscle.pdf)
 * [Same as above but including OLS + ASH. ASH does not perform well.](diff_alttypes_muscle_plus_ASH.pdf)
-* [Same as above but use RUV + estimate scale using controls + ASH instead of ASH.](diff_alttypes_muscle_plus_ASH_RUV.pdf) RUV + ASH is pretty good at estimating $\pi_0$, but has poor AUC.
+* [Same as above but use RUV + estimate scale using controls + ASH instead of ASH.](diff_alttypes_muscle_plus_ASH_RUV.pdf) RUV + ASH does great with variance inflation. Call this RUVASH.
+* [pi0 vs pi0hat for various estimates.](pi0hat_sims.pdf) Akin to Figure 2b in @stephens2016false, but using the GTEX data plus Poisson thinning to generate signal. RUVASH and SUCCOTASH do the best.
 
 ## Other Implementation Checks.
 
@@ -61,3 +63,5 @@ title: "Home"
 ## Shiny App
 
 * Visit [here](https://github.com/dcgerard/succotash_sims/tree/master/analysis/mouthwash)
+
+## References

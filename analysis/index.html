@@ -182,11 +182,12 @@ $(document).ready(function () {
 <li><a href="#nonnull-sims.-grid-confounders-and-variance-unknown.">Nonnull Sims. Grid, Confounders, and Variance <em>unknown</em>.</a></li>
 <li><a href="#other-implementation-checks.">Other Implementation Checks.</a></li>
 <li><a href="#shiny-app">Shiny App</a></li>
+<li><a href="#references">References</a></li>
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-05-21</p>
-<p><strong>Code version:</strong> d94c90e7f53c6e8a70c3c58b5dd5bd622e24336a</p>
+<p><strong>Last updated:</strong> 2016-05-24</p>
+<p><strong>Code version:</strong> 3e698b5567439ac70866599641770b74f7298b22</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -235,7 +236,8 @@ $(document).ready(function () {
 <li><a href="nopen_then_inflate.pdf">Best results I’ve seen. Used a two step procedure of estimating, then inflating, variance scaling parameter for SUCCOTASH.</a></li>
 <li><a href="diff_alttypes_muscle.pdf">Using same alternatives as in ASH paper, SUCCOTASH has superior performance</a></li>
 <li><a href="diff_alttypes_muscle_plus_ASH.pdf">Same as above but including OLS + ASH. ASH does not perform well.</a></li>
-<li><a href="diff_alttypes_muscle_plus_ASH_RUV.pdf">Same as above but use RUV + estimate scale using controls + ASH instead of ASH.</a> RUV + ASH is pretty good at estimating <span class="math inline">\(\pi_0\)</span>, but has poor AUC.</li>
+<li><a href="diff_alttypes_muscle_plus_ASH_RUV.pdf">Same as above but use RUV + estimate scale using controls + ASH instead of ASH.</a> RUV + ASH does great with variance inflation. Call this RUVASH.</li>
+<li><a href="pi0hat_sims.pdf">pi0 vs pi0hat for various estimates.</a> Akin to Figure 2b in <span class="citation">Stephens (2016)</span>, but using the GTEX data plus Poisson thinning to generate signal. RUVASH and SUCCOTASH do the best.</li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">
@@ -253,6 +255,14 @@ $(document).ready(function () {
 <ul>
 <li>Visit <a href="https://github.com/dcgerard/succotash_sims/tree/master/analysis/mouthwash">here</a></li>
 </ul>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-stephens2016false">
+<p>Stephens, Matthew. 2016. “False Discovery Rates: A New Deal.” <em>BioRxiv</em>. Cold Spring Harbor Labs Journals, 038216.</p>
+</div>
+</div>
 </div>
 
 
