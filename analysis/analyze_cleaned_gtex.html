@@ -173,6 +173,7 @@ tau</code></pre>
 qout$pi0</code></pre>
 <pre><code>## [1] 0.5104</code></pre>
 <p>Which is very different from the estimates of RUVASH and SUCCOTASH.</p>
+<p>The estimates of the variance scaling parameters are very similar. SUCCOTASH inflates the variance by 3.9159, while RUVASH inflates the variance by 4.0523.</p>
 </div>
 <div id="what-about-ols-limma" class="section level2">
 <h2>What About OLS + Limma?</h2>
@@ -203,17 +204,17 @@ lim_onsex &lt;- onsex[order(lim_p)]</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_2.1.0 REBayes_0.62  Matrix_1.2-6 
+## [1] REBayes_0.62  Matrix_1.2-6  ggplot2_2.1.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] qvalue_2.2.0         genefilter_1.52.0    reshape2_1.4.1      
-##  [4] ashr_1.2             splines_3.3.0        lattice_0.20-33     
+##  [1] qvalue_2.2.0         genefilter_1.52.0    ashr_1.2            
+##  [4] reshape2_1.4.1       splines_3.3.0        lattice_0.20-33     
 ##  [7] cate_1.0.4           Rmosek_7.1.2         colorspace_1.2-6    
 ## [10] htmltools_0.3.5      stats4_3.3.0         yaml_2.1.13         
-## [13] mgcv_1.8-12          survival_2.39-2      XML_3.98-1.3        
+## [13] mgcv_1.8-12          XML_3.98-1.3         survival_2.39-2     
 ## [16] DBI_0.4              BiocGenerics_0.16.1  foreach_1.4.3       
 ## [19] plyr_1.8.3           sva_3.18.0           stringr_1.0.0       
-## [22] leapp_1.2            munsell_0.4.3        gtable_0.2.0        
+## [22] munsell_0.4.3        leapp_1.2            gtable_0.2.0        
 ## [25] svd_0.3.3-2          codetools_0.2-14     evaluate_0.9        
 ## [28] labeling_0.3         Biobase_2.30.0       knitr_1.12.28       
 ## [31] IRanges_2.4.6        doParallel_1.0.10    pscl_1.4.9          
