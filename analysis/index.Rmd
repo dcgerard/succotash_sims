@@ -60,6 +60,10 @@ bibliography: sva_bib.bib
 * [t-likelihood seems to be implemented correctly](test_tlike.pdf)
 * [Scaling variances seems to be coded up correctly](scale_check.pdf)
 
+## GTEX Analysis
+* [Procedure for cleaning the GTEX data.](gtex_clean.html)
+* [RUV4 and RUVASH give very similar results for top genes in heart data.](analyze_cleaned_gtex.html)
+
 ## Shiny App
 
 * Visit [here](https://github.com/dcgerard/succotash_sims/tree/master/analysis/mouthwash)
