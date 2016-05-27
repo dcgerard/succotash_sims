@@ -61,8 +61,10 @@ bibliography: sva_bib.bib
 * [Scaling variances seems to be coded up correctly](scale_check.pdf)
 
 ## GTEX Analysis
-* [Procedure for cleaning the GTEX data.](gtex_clean.html)
+* [Procedure for cleaning the GTEX data for heart.](gtex_clean.html)
+* [Exact same as above but for muscle.](gtex_clean_muscle.html)
 * [RUV4 and RUVASH give very similar results for top genes in heart data.](analyze_cleaned_gtex.html)
+* [Same plots as above but for muscle.](analyze_cleaned_gtex_muscle.html)
 
 ## Shiny App
 
