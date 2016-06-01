@@ -188,7 +188,7 @@ $(document).ready(function () {
 </div>
 
 <p><strong>Last updated:</strong> 2016-06-01</p>
-<p><strong>Code version:</strong> c63a82da9b98eae21d6ce04d230ec9efe643a677</p>
+<p><strong>Code version:</strong> f502871924c3a997002d30509e206734d7d29f22</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -238,6 +238,7 @@ $(document).ready(function () {
 <li><a href="diff_alttypes_muscle.pdf">Using same alternatives as in ASH paper, SUCCOTASH has superior performance</a></li>
 <li><a href="diff_alttypes_muscle_plus_ASH.pdf">Same as above but including OLS + ASH. ASH does not perform well.</a></li>
 <li><a href="diff_alttypes_muscle_plus_ASH_RUV.pdf">Same as above but use RUV + estimate scale using controls + ASH instead of ASH.</a> RUV + ASH does great with variance inflation. Call this RUVASH.</li>
+<li><a href="diff_alttypes_muscle_plus_ASH_RUV_limma.pdf">Same as above but also limma-shrunk the variances prior to estimating scale and running ASH</a></li>
 <li><a href="diff_alttypes_muscle_bcv.pdf">Similar to above but use bicrossvalidation to choose the number of hidden confounders. No big change in performance.</a></li>
 <li><a href="pi0hat_sims.pdf">pi0 vs pi0hat for various estimates.</a> Akin to Figure 2b in <span class="citation">Stephens (2016)</span>, but using the GTEX data plus Poisson thinning to generate signal. RUVASH and SUCCOTASH do the best.</li>
 </ul>
