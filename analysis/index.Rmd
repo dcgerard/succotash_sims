@@ -68,6 +68,7 @@ bibliography: sva_bib.bib
 * [RUV4 and RUVASH give very similar results for top genes in heart data.](analyze_cleaned_gtex.html)
 * [Same plots as above but for muscle.](analyze_cleaned_gtex_muscle.html)
 * [Same plots as above but for blood.](analyze_cleaned_gtex_blood.html)
+* [Seeing variance inflation estimated differently in GTEX data vs all-null setting](inflation_vs_nsamp.html)
 
 ## Shiny App
 
