@@ -188,7 +188,7 @@ $(document).ready(function () {
 </div>
 
 <p><strong>Last updated:</strong> 2016-06-02</p>
-<p><strong>Code version:</strong> 01a3207b3721a24e49e72cc99505f64672425417</p>
+<p><strong>Code version:</strong> fa875a411cc2cfece7c4bbe4c0c8ee594da3b276</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -210,6 +210,7 @@ $(document).ready(function () {
 <li><a href="count_theo_sims_cpm.pdf">Same as above but using counts-per-million as output.</a></li>
 <li><a href="suc_v_rest_real_writeup.pdf">Lung data, covariates randomized, n = 200, SUCCOTASH does best in terms of SSE and OK in terms of lfdr.</a></li>
 <li><a href="suc_v_rest_real_writeu_20v20.pdf">Same as previous but with n = 40. Still best in terms of SSE but lfdr performance is horrible.</a></li>
+<li><a href="null_behavior.pdf">RUV4’s t-statistics means and standard deviations when and when not estimating a variance inflation parameter.</a></li>
 </ul>
 </div>
 <div id="nonnull-sims.-grid-confounders-and-variance-unknown." class="section level2">
@@ -235,6 +236,7 @@ $(document).ready(function () {
 <li><a href="sva_ash_varinflate.pdf">SVA + OLS + ASH while estimating variance inflation parameter does not work well in terms of estimating the null proportion.</a> Also looked at using a penalty on the variance inflation parameter in SUCCOTASH, but only provided small improvement.s</li>
 <li><a href="ashr_cate.pdf">Same as above but using CATE instead of SVA. Performance of ASH + CATE is same as ASH + SVA</a></li>
 <li><a href="nopen_then_inflate.pdf">Best results I’ve seen. Used a two step procedure of estimating, then inflating, variance scaling parameter for SUCCOTASH.</a></li>
+<li><a href="muscle_tissue.pdf">Plots for same scenario as above, but included t-SUCCOTASH</a></li>
 <li><a href="diff_alttypes_muscle.pdf">Using same alternatives as in ASH paper, SUCCOTASH has superior performance</a></li>
 <li><a href="diff_alttypes_muscle_plus_ASH.pdf">Same as above but including OLS + ASH. ASH does not perform well.</a></li>
 <li><a href="diff_alttypes_muscle_plus_ASH_RUV.pdf">Same as above but use RUV + estimate scale using controls + ASH instead of ASH.</a> RUV + ASH does great with variance inflation. Call this RUVASH.</li>
