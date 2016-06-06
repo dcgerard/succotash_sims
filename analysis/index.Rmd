@@ -67,6 +67,7 @@ bibliography: sva_bib.bib
 * [Grid is known, SUCCOTASH performs well](known_grid.html)
 * [t-likelihood seems to be implemented correctly](test_tlike.pdf)
 * [Scaling variances seems to be coded up correctly](scale_check.pdf)
+* [Scaling factor probably not because of augmented design matrix.](explore_ruvmult.html) ASH lfdr ordering different when scaling variance, even though t-statistics remain unchanged.
 
 ## GTEX Analysis
 * [Procedure for cleaning the GTEX data for heart.](gtex_clean.html)
