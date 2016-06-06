@@ -187,8 +187,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-06-03</p>
-<p><strong>Code version:</strong> 390ad6d8fa7a30619047b55ea35b4ce30d0836e8</p>
+<p><strong>Last updated:</strong> 2016-06-06</p>
+<p><strong>Code version:</strong> 86b6510f998494395d18082a68655752309acc57</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -211,6 +211,7 @@ $(document).ready(function () {
 <li><a href="suc_v_rest_real_writeup.pdf">Lung data, covariates randomized, n = 200, SUCCOTASH does best in terms of SSE and OK in terms of lfdr.</a></li>
 <li><a href="suc_v_rest_real_writeu_20v20.pdf">Same as previous but with n = 40. Still best in terms of SSE but lfdr performance is horrible.</a></li>
 <li><a href="null_behavior.pdf">RUV4’s t-statistics means and standard deviations when and when not estimating a variance inflation parameter.</a></li>
+<li><a href="null_behaviort.pdf">Same as above but using t-likelihood when estimating the variance inflation parameter.</a></li>
 </ul>
 </div>
 <div id="nonnull-sims.-grid-confounders-and-variance-unknown." class="section level2">
@@ -245,6 +246,7 @@ $(document).ready(function () {
 <li><a href="diff_alttypes_muscle_bcv.pdf">Similar to above but use bicrossvalidation to choose the number of hidden confounders. No big change in performance.</a></li>
 <li><a href="pi0hat_sims.pdf">pi0 vs pi0hat for various estimates.</a> Akin to Figure 2b in <span class="citation">Stephens (2016)</span>, but using the GTEX data plus Poisson thinning to generate signal. RUVASH and SUCCOTASH do the best.</li>
 <li><a href="scale_plot.pdf">Scale estimates in RUVASH invariant to alternative type.</a> Shrinks with sample size.</li>
+<li><a href="diff_alttypes_ruvasht.pdf">Using t-likelihood had very little effect on the performance of RUVASH compared to using the normal likelihood.</a></li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">
