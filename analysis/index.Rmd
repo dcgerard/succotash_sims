@@ -76,6 +76,7 @@ bibliography: sva_bib.bib
 * [Same plots as above but for muscle.](analyze_cleaned_gtex_muscle.html)
 * [Same plots as above but for blood.](analyze_cleaned_gtex_blood.html)
 * [Seeing variance inflation estimated differently in GTEX data vs all-null setting](inflation_vs_nsamp.html)
+* [Used t-likelihood for muscle and didn't change the result that much.](fit_ruvasht_muscle.html) The differences I did observe probably only resulted because I didn't do any posthoc inflation.
 
 ## Shiny App
 
