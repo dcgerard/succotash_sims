@@ -59,6 +59,7 @@ bibliography: sva_bib.bib
 * [pi0 vs pi0hat for various estimates.](pi0hat_sims.pdf) Akin to Figure 2b in @stephens2016false, but using the GTEX data plus Poisson thinning to generate signal. RUVASH and SUCCOTASH do the best.
 * [Scale estimates in RUVASH invariant to alternative type.](scale_plot.pdf) Shrinks with sample size.
 * [Using t-likelihood had very little effect on the performance of RUVASH compared to using the normal likelihood.](diff_alttypes_ruvasht.pdf)
+* [Simulations using data generated from assumed model.](diff_alttypes_gaussian.pdf) Results are less clear. RUVASH still appears to perform best. Need to think about settings more carefully.
 
 ## Other Implementation Checks.
 
