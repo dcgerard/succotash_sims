@@ -60,6 +60,7 @@ bibliography: sva_bib.bib
 * [Scale estimates in RUVASH invariant to alternative type.](scale_plot.pdf) Shrinks with sample size.
 * [Using t-likelihood had very little effect on the performance of RUVASH compared to using the normal likelihood.](diff_alttypes_ruvasht.pdf)
 * [Simulations using data generated from assumed model.](diff_alttypes_gaussian.pdf) Results are less clear. RUVASH still appears to perform best. Need to think about settings more carefully.
+* [Same as above but using limma-shrunk variances in RUVASH and reduced variances of non-signal.](diff_alttypes_gaussian_limmashrink.pdf) RUVASH does great in terms of AUC, wins in estimating $\pi_0$ when $n$ is large.
 
 ## Other Implementation Checks.
 

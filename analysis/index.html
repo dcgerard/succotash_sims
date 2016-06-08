@@ -187,8 +187,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-06-07</p>
-<p><strong>Code version:</strong> ce7dcb951b7d84dc44fb67b6eb5fc1da798d811c</p>
+<p><strong>Last updated:</strong> 2016-06-08</p>
+<p><strong>Code version:</strong> 01df23f8331bb5eb544d05773d76f2e629a6e866</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -248,6 +248,7 @@ $(document).ready(function () {
 <li><a href="scale_plot.pdf">Scale estimates in RUVASH invariant to alternative type.</a> Shrinks with sample size.</li>
 <li><a href="diff_alttypes_ruvasht.pdf">Using t-likelihood had very little effect on the performance of RUVASH compared to using the normal likelihood.</a></li>
 <li><a href="diff_alttypes_gaussian.pdf">Simulations using data generated from assumed model.</a> Results are less clear. RUVASH still appears to perform best. Need to think about settings more carefully.</li>
+<li><a href="diff_alttypes_gaussian_limmashrink.pdf">Same as above but using limma-shrunk variances in RUVASH and reduced variances of non-signal.</a> RUVASH does great in terms of AUC, wins in estimating <span class="math inline">\(\pi_0\)</span> when <span class="math inline">\(n\)</span> is large.</li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">
