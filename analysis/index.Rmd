@@ -81,6 +81,11 @@ bibliography: sva_bib.bib
 * [Seeing variance inflation estimated differently in GTEX data vs all-null setting](inflation_vs_nsamp.html)
 * [Used t-likelihood for muscle and didn't change the result that much.](fit_ruvasht_muscle.html) The differences I did observe probably only resulted because I didn't do any posthoc inflation.
 
+## Individual Datasets
+* [All null setting.](heart_t.html) RUVASH with a t-likelihood gives really good t-statistics. Calibrated CATE also gives really good t-statistics.
+* [80\% null setting.](heart_t_nonnull.html) RUVASH with a t-likelihood again does very well. Calibrated CATE does ok.
+* [MAD inflation always improves ASH.](cate_cal.html) Motivated by CATE, I used MAD inflation on the standard errors. This always improved ASH's performance.
+
 ## Shiny App
 
 * Visit [here](https://github.com/dcgerard/succotash_sims/tree/master/analysis/mouthwash)

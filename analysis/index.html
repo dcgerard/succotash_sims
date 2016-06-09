@@ -182,13 +182,14 @@ $(document).ready(function () {
 <li><a href="#nonnull-sims.-grid-confounders-and-variance-unknown.">Nonnull Sims. Grid, Confounders, and Variance <em>unknown</em>.</a></li>
 <li><a href="#other-implementation-checks.">Other Implementation Checks.</a></li>
 <li><a href="#gtex-analysis">GTEX Analysis</a></li>
+<li><a href="#individual-datasets">Individual Datasets</a></li>
 <li><a href="#shiny-app">Shiny App</a></li>
 <li><a href="#references">References</a></li>
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-06-08</p>
-<p><strong>Code version:</strong> 01df23f8331bb5eb544d05773d76f2e629a6e866</p>
+<p><strong>Last updated:</strong> 2016-06-09</p>
+<p><strong>Code version:</strong> be247b03eb9fb7585a0879fb8bf00369428153f2</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -273,6 +274,14 @@ $(document).ready(function () {
 <li><a href="analyze_cleaned_gtex_blood.html">Same plots as above but for blood.</a></li>
 <li><a href="inflation_vs_nsamp.html">Seeing variance inflation estimated differently in GTEX data vs all-null setting</a></li>
 <li><a href="fit_ruvasht_muscle.html">Used t-likelihood for muscle and didn’t change the result that much.</a> The differences I did observe probably only resulted because I didn’t do any posthoc inflation.</li>
+</ul>
+</div>
+<div id="individual-datasets" class="section level2">
+<h2>Individual Datasets</h2>
+<ul>
+<li><a href="heart_t.html">All null setting.</a> RUVASH with a t-likelihood gives really good t-statistics. Calibrated CATE also gives really good t-statistics.</li>
+<li><a href="heart_t_nonnull.html">80% null setting.</a> RUVASH with a t-likelihood again does very well. Calibrated CATE does ok.</li>
+<li><a href="cate_cal.html">MAD inflation always improves ASH.</a> Motivated by CATE, I used MAD inflation on the standard errors. This always improved ASH’s performance.</li>
 </ul>
 </div>
 <div id="shiny-app" class="section level2">
