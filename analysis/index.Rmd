@@ -61,6 +61,7 @@ bibliography: sva_bib.bib
 * [Using t-likelihood had very little effect on the performance of RUVASH compared to using the normal likelihood.](diff_alttypes_ruvasht.pdf)
 * [Simulations using data generated from assumed model.](diff_alttypes_gaussian.pdf) Results are less clear. RUVASH still appears to perform best. Need to think about settings more carefully.
 * [Same as above but using limma-shrunk variances in RUVASH and reduced variances of non-signal.](diff_alttypes_gaussian_limmashrink.pdf) RUVASH does great in terms of AUC, wins in estimating $\pi_0$ when $n$ is large.
+* [Same as above, but used MAD-inflated + ASH methods.](diff_alttypes_muscle_mad.pdf) RUVASH still works the best. SUCCOTASH works the best among methods that don't use control genes.
 
 ## Other Implementation Checks.
 
