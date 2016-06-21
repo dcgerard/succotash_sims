@@ -63,6 +63,7 @@ bibliography: sva_bib.bib
 * [Same as above but using limma-shrunk variances in RUVASH and reduced variances of non-signal.](diff_alttypes_gaussian_limmashrink.pdf) RUVASH does great in terms of AUC, wins in estimating $\pi_0$ when $n$ is large.
 * [Same as above, but used MAD-inflated + ASH methods.](diff_alttypes_muscle_mad.pdf) RUVASH still works the best. SUCCOTASH works the best among methods that don't use control genes.
 * [Mad inflated + ASH methods using t-likelihood for MAD inflation and ASH.](muscle_tissue_madt.pdf) Same simulation settings as [here.](nopen_then_inflate.pdf)
+* [Using SUCCOTASH to estimate unimodal inflation using control genes doesn't work too well.](muscle_tissue_succ_then_ash.pdf)
 
 ## Other Implementation Checks.
 

@@ -188,8 +188,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-06-13</p>
-<p><strong>Code version:</strong> 4a41c9e212f14217e14aee3e7fff0b2a51677880</p>
+<p><strong>Last updated:</strong> 2016-06-21</p>
+<p><strong>Code version:</strong> 97e9656f1201db6822f906de360b560e9cf65b72</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -252,6 +252,7 @@ $(document).ready(function () {
 <li><a href="diff_alttypes_gaussian_limmashrink.pdf">Same as above but using limma-shrunk variances in RUVASH and reduced variances of non-signal.</a> RUVASH does great in terms of AUC, wins in estimating <span class="math inline">\(\pi_0\)</span> when <span class="math inline">\(n\)</span> is large.</li>
 <li><a href="diff_alttypes_muscle_mad.pdf">Same as above, but used MAD-inflated + ASH methods.</a> RUVASH still works the best. SUCCOTASH works the best among methods that don’t use control genes.</li>
 <li><a href="muscle_tissue_madt.pdf">Mad inflated + ASH methods using t-likelihood for MAD inflation and ASH.</a> Same simulation settings as <a href="nopen_then_inflate.pdf">here.</a></li>
+<li><a href="muscle_tissue_succ_then_ash.pdf">Using SUCCOTASH to estimate unimodal inflation using control genes doesn’t work too well.</a></li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">
