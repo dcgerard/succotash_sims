@@ -188,8 +188,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-06-21</p>
-<p><strong>Code version:</strong> 3692e1fbe42ee51e28f95716794e9f6f6dd09551</p>
+<p><strong>Last updated:</strong> 2016-06-27</p>
+<p><strong>Code version:</strong> 391c15f7fea021aed4e279dff14e9a87a37239c1</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -253,6 +253,8 @@ $(document).ready(function () {
 <li><a href="diff_alttypes_muscle_mad.pdf">Same as above, but used MAD-inflated + ASH methods.</a> RUVASH still works the best. SUCCOTASH works the best among methods that don’t use control genes.</li>
 <li><a href="muscle_tissue_madt.pdf">Mad inflated + ASH methods using t-likelihood for MAD inflation and ASH.</a> Same simulation settings as <a href="nopen_then_inflate.pdf">here.</a></li>
 <li><a href="muscle_tissue_succ_then_ash.pdf">Using SUCCOTASH to estimate unimodal inflation using control genes works ok.</a> It is slightly anticonservative for small n. For larger n, SUCCOTASH estimates the proportion of nulls to be near 1. In this case, the confounders are estimated the exact same as in GLS, and SUCCOTASH reduces to RUVASH. Don’t know if there is any benefit to using unimodal inflation.</li>
+<li><a href="muscle_tissue_largen.pdf">Simulations using n = 200.</a> MAD inflated RUV and RUVASH work equally well for large <span class="math inline">\(\pi_0\)</span>.</li>
+<li><a href="muscle_tissue_alpha1.pdf">RUVASH simulations using alpha = 1</a> This is where the t-statistics are assumed to be exchangeable. The coding is the first T/F is for posthoc_inflate the second T/F is for limmashrink. <span class="math inline">\(\pi_0\)</span> is still accurately estimated, but the post-hoc inflation seems to be less necessary. AUC is almost exactly the same when limmashrink = FALSE as cate_nc, which it should be. limmashrink = TRUE increases the AUC a little bit.</li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">

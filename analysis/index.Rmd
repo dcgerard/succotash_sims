@@ -64,6 +64,8 @@ bibliography: sva_bib.bib
 * [Same as above, but used MAD-inflated + ASH methods.](diff_alttypes_muscle_mad.pdf) RUVASH still works the best. SUCCOTASH works the best among methods that don't use control genes.
 * [Mad inflated + ASH methods using t-likelihood for MAD inflation and ASH.](muscle_tissue_madt.pdf) Same simulation settings as [here.](nopen_then_inflate.pdf)
 * [Using SUCCOTASH to estimate unimodal inflation using control genes works ok.](muscle_tissue_succ_then_ash.pdf) It is slightly anticonservative for small n. For larger n, SUCCOTASH estimates the proportion of nulls to be near 1. In this case, the confounders are estimated the exact same as in GLS, and SUCCOTASH reduces to RUVASH. Don't know if there is any benefit to using unimodal inflation.
+* [Simulations using n = 200.](muscle_tissue_largen.pdf) MAD inflated RUV and RUVASH work equally well for large $\pi_0$.
+* [RUVASH simulations using alpha = 1](muscle_tissue_alpha1.pdf) This is where the t-statistics are assumed to be exchangeable. The coding is the first T/F is for posthoc_inflate the second T/F is for limmashrink. $\pi_0$ is still accurately estimated, but the post-hoc inflation seems to be less necessary. AUC is almost exactly the same when limmashrink = FALSE as cate_nc, which it should be. limmashrink = TRUE increases the AUC a little bit.
 
 ## Other Implementation Checks.
 
