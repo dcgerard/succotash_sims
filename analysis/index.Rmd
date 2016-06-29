@@ -78,6 +78,7 @@ bibliography: sva_bib.bib
 * [Scaling factor probably not because of augmented design matrix.](explore_ruvmult.html) ASH lfdr ordering different when scaling variance, even though t-statistics remain unchanged.
 * [Limma is scale-equivariant](limmashrink_invariance.html)
 * [SUCCOTASH gives reasonable results no matter the starting positions.](muscle_succ_diff_init.pdf)
+* [Same as above but one-step SUCCOTASH rather than two-step SUCCOTASH.](muscle_succ_diff_init_onestep.pdf)
 
 ## GTEX Analysis
 * [Procedure for cleaning the GTEX data for heart.](gtex_clean.html)
