@@ -67,6 +67,7 @@ bibliography: sva_bib.bib
 * [Simulations using n = 200.](muscle_tissue_largen.pdf) MAD inflated RUV and RUVASH work equally well for large $\pi_0$.
 * [RUVASH simulations using alpha = 1](muscle_tissue_alpha1.pdf) This is where the t-statistics are assumed to be exchangeable. The coding is the first T/F is for posthoc_inflate the second T/F is for limmashrink. $\pi_0$ is still accurately estimated, but the post-hoc inflation seems to be less necessary. AUC is almost exactly the same when limmashrink = FALSE as cate_nc, which it should be. limmashrink = TRUE increases the AUC a little bit.
 * [Additive inflation almost always estimated near zero.](muscle_tissue_adinf.pdf) Same coding as above. This is particularly true for n >= 10 and for limmashrunk variances.
+* [Small improvement to RUVASH by using X AND Zhat to estimate standard errors of betahat.](different_ruvashes.pdf)
 
 ## Other Implementation Checks.
 

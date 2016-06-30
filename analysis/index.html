@@ -188,8 +188,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-06-29</p>
-<p><strong>Code version:</strong> 3aad8ca878c312adcfcc04de91b4da56b2e45b5b</p>
+<p><strong>Last updated:</strong> 2016-06-30</p>
+<p><strong>Code version:</strong> 082e3daeec24e39449f9b93b778bbaad49d671e7</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -256,6 +256,7 @@ $(document).ready(function () {
 <li><a href="muscle_tissue_largen.pdf">Simulations using n = 200.</a> MAD inflated RUV and RUVASH work equally well for large <span class="math inline">\(\pi_0\)</span>.</li>
 <li><a href="muscle_tissue_alpha1.pdf">RUVASH simulations using alpha = 1</a> This is where the t-statistics are assumed to be exchangeable. The coding is the first T/F is for posthoc_inflate the second T/F is for limmashrink. <span class="math inline">\(\pi_0\)</span> is still accurately estimated, but the post-hoc inflation seems to be less necessary. AUC is almost exactly the same when limmashrink = FALSE as cate_nc, which it should be. limmashrink = TRUE increases the AUC a little bit.</li>
 <li><a href="muscle_tissue_adinf.pdf">Additive inflation almost always estimated near zero.</a> Same coding as above. This is particularly true for n &gt;= 10 and for limmashrunk variances.</li>
+<li><a href="different_ruvashes.pdf">Small improvement to RUVASH by using X AND Zhat to estimate standard errors of betahat.</a></li>
 </ul>
 </div>
 <div id="other-implementation-checks." class="section level2">
