@@ -70,6 +70,7 @@ bibliography: sva_bib.bib
 * [Small improvement to RUVASH by using X AND Zhat to estimate standard errors of betahat.](different_ruvashes.pdf)
 * [RUVASH using maximum number of factors allowed.](max_numsv.pdf) As long as limmashrunk variances are used, this actually works quite well.
 
+
 ## Other Implementation Checks.
 
 * [Gives same results as `ashr` when no confounders.](check_with_ash.pdf)
@@ -96,6 +97,7 @@ bibliography: sva_bib.bib
 * [All null setting.](heart_t.html) RUVASH with a t-likelihood gives really good t-statistics. Calibrated CATE also gives really good t-statistics.
 * [80\% null setting.](heart_t_nonnull.html) RUVASH with a t-likelihood again does very well. Calibrated CATE does ok.
 * [MAD inflation always improves ASH.](cate_cal.html) Motivated by CATE, I used MAD inflation on the standard errors. This always improved ASH's performance.
+* [Variance estimates seem to be OK when simulating under the assumed model.](change_q.html) But RUVASH still estimates a large variance inflation and most methods still underestimate $\pi_0$. RUVASH seems to be over-inflating though.
 
 ## Shiny App
 

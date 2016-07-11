@@ -188,8 +188,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-06-30</p>
-<p><strong>Code version:</strong> c199edefcb62ba3f6932db250f3e40b79f2340cb</p>
+<p><strong>Last updated:</strong> 2016-07-11</p>
+<p><strong>Code version:</strong> 8edd373a5117e4e4eec1636e8c1a239a66f153d0</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -293,6 +293,7 @@ $(document).ready(function () {
 <li><a href="heart_t.html">All null setting.</a> RUVASH with a t-likelihood gives really good t-statistics. Calibrated CATE also gives really good t-statistics.</li>
 <li><a href="heart_t_nonnull.html">80% null setting.</a> RUVASH with a t-likelihood again does very well. Calibrated CATE does ok.</li>
 <li><a href="cate_cal.html">MAD inflation always improves ASH.</a> Motivated by CATE, I used MAD inflation on the standard errors. This always improved ASH’s performance.</li>
+<li><a href="change_q.html">Variance estimates seem to be OK when simulating under the assumed model.</a> But RUVASH still estimates a large variance inflation and most methods still underestimate <span class="math inline">\(\pi_0\)</span>. RUVASH seems to be over-inflating though.</li>
 </ul>
 </div>
 <div id="shiny-app" class="section level2">
