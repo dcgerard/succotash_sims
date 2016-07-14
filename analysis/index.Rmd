@@ -69,7 +69,7 @@ bibliography: sva_bib.bib
 * [Additive inflation almost always estimated near zero.](muscle_tissue_adinf.pdf) Same coding as above. This is particularly true for n >= 10 and for limmashrunk variances.
 * [Small improvement to RUVASH by using X AND Zhat to estimate standard errors of betahat.](different_ruvashes.pdf)
 * [RUVASH using maximum number of factors allowed.](max_numsv.pdf) As long as limmashrunk variances are used, this actually works quite well.
-
+* [Bias adjustment seems to slightly improve AUC but at the expense of slightl worse calibration.](adjust_bias.html)
 
 ## Other Implementation Checks.
 
