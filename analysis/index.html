@@ -189,8 +189,8 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p><strong>Last updated:</strong> 2016-07-14</p>
-<p><strong>Code version:</strong> f9b7554a7803ee5bca6779f8e56a6b2b4bbe00a7</p>
+<p><strong>Last updated:</strong> 2016-07-16</p>
+<p><strong>Code version:</strong> 52a4647530b42ffbcb834b1b3f1efa1bee0e631c</p>
 <div id="known-grid-confounders-and-variances." class="section level2">
 <h2>Known: Grid, Confounders, and Variances.</h2>
 <ul>
@@ -296,6 +296,7 @@ $(document).ready(function () {
 <li><a href="heart_t_nonnull.html">80% null setting.</a> RUVASH with a t-likelihood again does very well. Calibrated CATE does ok.</li>
 <li><a href="cate_cal.html">MAD inflation always improves ASH.</a> Motivated by CATE, I used MAD inflation on the standard errors. This always improved ASH’s performance.</li>
 <li><a href="change_q.html">Variance estimates seem to be OK when simulating under the assumed model.</a> But RUVASH still estimates a large variance inflation and most methods still underestimate <span class="math inline">\(\pi_0\)</span>. RUVASH seems to be over-inflating though.</li>
+<li><a href="checkout_vruv2.pdf">Tried another variance inflation approach to RUV2, but it doesn’t work too well.</a> I tried accounting for inflation during the factor analysis.</li>
 </ul>
 </div>
 <div id="presentations" class="section level2">

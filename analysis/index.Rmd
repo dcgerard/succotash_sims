@@ -98,6 +98,7 @@ bibliography: sva_bib.bib
 * [80\% null setting.](heart_t_nonnull.html) RUVASH with a t-likelihood again does very well. Calibrated CATE does ok.
 * [MAD inflation always improves ASH.](cate_cal.html) Motivated by CATE, I used MAD inflation on the standard errors. This always improved ASH's performance.
 * [Variance estimates seem to be OK when simulating under the assumed model.](change_q.html) But RUVASH still estimates a large variance inflation and most methods still underestimate $\pi_0$. RUVASH seems to be over-inflating though.
+* [Tried another variance inflation approach to RUV2, but it doesn't work too well.](checkout_vruv2.pdf) I tried accounting for inflation during the factor analysis.
 
 ## Presentations
 * [JSM 2016 Draft](jsm_2016.pdf)
