@@ -100,8 +100,8 @@ bibliography: sva_bib.bib
 * [Variance estimates seem to be OK when simulating under the assumed model.](change_q.html) But RUVASH still estimates a large variance inflation and most methods still underestimate $\pi_0$. RUVASH seems to be over-inflating though.
 * [Tried another variance inflation approach to RUV2, but it doesn't work too well.](checkout_vruv2.pdf) I tried accounting for inflation during the factor analysis.
 
-## Presentations
-* [JSM 2016 Draft](jsm_2016.pdf)
+## RUVB
+* [Adding 75th percentile post Poisson thinning seems best approach](compare_normalization.html)
 
 ## Shiny App
 
