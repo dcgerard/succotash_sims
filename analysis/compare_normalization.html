@@ -125,7 +125,10 @@ $(document).ready(function () {
 
 <div id="abstract" class="section level1">
 <h1>Abstract</h1>
-<p>Here, I aggregate some simulations that I’ve done. The emphasis is to discuss the effect of library size adjustment on the results.</p>
+<p>I ran some simulations where I used the entire library to calculate the 75th quantile of log-counts which I then included as a covariate. RUVB did very poorly in these simulations, so I spent the morning playing with the different approaches that I’ve done. I have a simulation setting where there is no adjustment, a simulation setting where I included the 75th percentile of the log-counts as a covariate after the subsampling genes and the Poisson thinning, and one where I included the 75th percentile of the log-counts a covariate prior to subsampling the genes and prior to the Poisson thinning.</p>
+<p>My general conclusions are (1) using the whole library makes things worse, (2) including the extra covariate from just the subsampled genes makes things worse for smaller sample sizes and better for larger sample sizes.</p>
+<p>Another intersting thing is that the OLS method gets the greatest amount of improvement. This makes sense as the 75th percentile of the log-counts is an unobserved confounder, so all of the other methods are already trying to adjust for it.</p>
+<p>My performance metrics are AUC and MSE.</p>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
